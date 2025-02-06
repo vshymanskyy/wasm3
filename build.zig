@@ -12,11 +12,11 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
     libwasm3.root_module.sanitize_c = false; // fno-sanitize=undefined
-    libwasm3.defineCMacro("d_m3HasTracer", null);
+    libwasm3.root_module.addCMacro("d_m3HasTracer", "");
 
     if (libwasm3.rootModuleTarget().isWasm()) {
         if (libwasm3.rootModuleTarget().os.tag == .wasi) {
-            libwasm3.defineCMacro("d_m3HasWASI", null);
+            libwasm3.root_module.addCMacro("d_m3HasWASI", "");
             libwasm3.linkSystemLibrary("wasi-emulated-process-clocks");
         }
     }
